@@ -13,7 +13,5 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
 		
 		navigationItem.largeTitleDisplayMode = .never
-
-        // Do any additional setup after loading the view.
     }
 }

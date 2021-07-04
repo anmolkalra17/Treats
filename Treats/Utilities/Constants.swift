@@ -12,6 +12,4 @@ struct Constants {
 	let scheme = "https"
 	let host = "api.spoonacular.com"
 	let path = "/recipes/complexSearch"
-	
-	
 }
