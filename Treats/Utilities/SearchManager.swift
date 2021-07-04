@@ -38,8 +38,8 @@ class SearchManager {
 			}
 			
 			if let safeData = data {
-				let result = self.parseJSON(for: safeData)
-				completion(result)
+				let response = self.parseJSON(for: safeData)
+				completion(response)
 			}
 		}.resume()
 	}

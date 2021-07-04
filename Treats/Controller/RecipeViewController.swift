@@ -8,10 +8,16 @@
 import UIKit
 
 class RecipeViewController: UIViewController {
-
-    override func viewDidLoad() {
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var readyInTextLabel: UILabel!
+	@IBOutlet weak var servesPeopleLabel: UILabel!
+	@IBOutlet weak var foodTypeImage: UIImageView!
+	@IBOutlet weak var stepsTextView: UITextView!
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
 		
 		navigationItem.largeTitleDisplayMode = .never
+		stepsTextView.isEditable = false
     }
 }

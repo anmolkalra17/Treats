@@ -9,36 +9,45 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
-	@IBOutlet weak var collectionView: UICollectionView!
-	var recipes = [RecipeData]()
+	var collectionView: UICollectionView!
+	var recipes = [Results]()
 	var recipeImageData = [String: Data]()
 	
-	override func viewWillAppear(_ animated: Bool) {
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
 		let search = "pasta"
 		let maxFat = "25"
 		let number = "1"
 		
 		SearchManager.instance.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
-			print(response)
-			self.recipes = response.results.map({ value in
-				RecipeData(vegetarian: value.vegetarian, readyInMinutes: value.readyInMinutes, servings: value.servings, title: value.title, image: value.image, summary: value.summary)
-			})
+			self.recipes = response.results
 		}
+		setupViews()
 	}
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-		setupView()
-		print(recipes.count)
-	}
-	
-	func setupView() {
+	func setupViews() {
+		let layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .vertical
+		layout.minimumLineSpacing = 8
+		layout.minimumInteritemSpacing = 8
+		collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "recipeCell")
+		collectionView.backgroundColor = .green
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
+		view.addSubview(collectionView)
+		
 		title = "Treats"
 		navigationController?.navigationBar.prefersLargeTitles = true
-		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "recipeCell")
+		
+		NSLayoutConstraint.activate([
+			collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+			collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+			collectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+			collectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor)
+		])
 	}
 }
 
@@ -46,6 +55,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return recipes.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: UIScreen.main.bounds.size.width, height: 300)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -71,6 +84,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		}
 		
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let recipeController = RecipeViewController()
+		recipeController.title = recipes[indexPath.row].title
+		present(recipeController, animated: true, completion: nil)
 	}
 	
 	func getImageForCell(using url: URL, completion: @escaping(Data) -> Void) {

@@ -11,9 +11,9 @@ class RecipeCell: UICollectionViewCell {
 	
 	let mainView: UIView = {
 		let someView = UIView()
-		someView.backgroundColor = .white
 		someView.layer.cornerRadius = 16
 		someView.translatesAutoresizingMaskIntoConstraints = false
+		someView.backgroundColor = .blue
 		return someView
 	}()
 	

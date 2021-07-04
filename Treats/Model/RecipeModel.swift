@@ -46,8 +46,7 @@ struct Step: Decodable {
 }
 
 struct Ent: Decodable {
-	let id: Int
-	let name, localizedName, image: String
+	let name: String
 }
 
 struct Length: Decodable {
