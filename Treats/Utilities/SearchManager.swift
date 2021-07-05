@@ -29,7 +29,7 @@ class SearchManager {
 		return url
 	}
 	
-	func getRecipeData(for food: String, maxFat: String?, numberOfResults: String?, completion: @escaping (RecipeModel) -> Void) {
+	func getRecipeData(for food: String, maxFat: String?, numberOfResults: String?, completion: @escaping ([Results]) -> Void) {
 		let url = createURL(for: food, maxFat: maxFat ?? "", number: numberOfResults ?? "")
 		let session = URLSession.shared
 		session.dataTask(with: url) { data, response, error in
@@ -44,14 +44,14 @@ class SearchManager {
 		}.resume()
 	}
 	
-	func parseJSON(for data: Data) -> RecipeModel {
-		var results: RecipeModel?
+	func parseJSON(for data: Data) -> [Results] {
+		var response: RecipeModel?
 		do {
-			results = try JSONDecoder().decode(RecipeModel.self, from: data)
+			response = try JSONDecoder().decode(RecipeModel.self, from: data)
 		} catch {
 			print(error)
 		}
-		guard let response = results else { fatalError("Could not parse data.") }
-		return response
+		guard let safeData = response else { fatalError("Could not parse data.") }
+		return safeData.results
 	}
 }

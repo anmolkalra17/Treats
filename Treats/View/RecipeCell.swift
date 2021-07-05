@@ -13,20 +13,23 @@ class RecipeCell: UICollectionViewCell {
 		let someView = UIView()
 		someView.layer.cornerRadius = 16
 		someView.translatesAutoresizingMaskIntoConstraints = false
-		someView.backgroundColor = .blue
+		someView.backgroundColor = .white
+		someView.layer.borderWidth = 0.5
+		someView.layer.borderColor = UIColor.black.cgColor
 		return someView
 	}()
 	
 	let imageView: UIImageView = {
 		let imageView = UIImageView()
 		imageView.contentMode = .scaleAspectFit
+		imageView.layer.cornerRadius = 16
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
 	}()
 
 	let recipeLabel: UILabel = {
 		let label = UILabel()
-		label.font = UIFont.boldSystemFont(ofSize: 32)
+		label.font = UIFont.boldSystemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -70,10 +73,7 @@ class RecipeCell: UICollectionViewCell {
 		mainView.addSubview(servingsLabel)
 		
 		NSLayoutConstraint.activate([
-			self.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: -8),
-			self.topAnchor.constraint(equalTo: mainView.topAnchor, constant: -16),
-			self.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: 8),
-			self.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: 16),
+			mainView.heightAnchor.constraint(equalToConstant: 300),
 			
 			imageView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
 			imageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
@@ -84,7 +84,9 @@ class RecipeCell: UICollectionViewCell {
 			recipeLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
 			
 			vegetarianImageView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-			vegetarianImageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: 8),
+			vegetarianImageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -8),
+			vegetarianImageView.widthAnchor.constraint(equalToConstant: 30),
+			vegetarianImageView.heightAnchor.constraint(equalToConstant: 30),
 			
 			readyInLabel.topAnchor.constraint(equalTo: recipeLabel.bottomAnchor, constant: 8),
 			readyInLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),

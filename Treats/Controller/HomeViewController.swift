@@ -9,31 +9,33 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
-	var collectionView: UICollectionView!
-	var recipes = [Results]()
+	@IBOutlet weak var collectionView: UICollectionView!
+	var recipes = [Results]() {
+		didSet {
+			DispatchQueue.main.async {
+				self.collectionView.reloadData()
+			}
+		}
+	}
 	var recipeImageData = [String: Data]()
+	let searchManager = SearchManager()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		let search = "pasta"
 		let maxFat = "25"
-		let number = "1"
+		let number = "2"
 		
-		SearchManager.instance.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
-			self.recipes = response.results
+		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
+			self.recipes = response
 		}
 		setupViews()
 	}
 	
 	func setupViews() {
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.minimumLineSpacing = 8
-		layout.minimumInteritemSpacing = 8
-		collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "recipeCell")
-		collectionView.backgroundColor = .green
+		collectionView.backgroundColor = .white
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -41,13 +43,6 @@ class HomeViewController: UIViewController {
 		
 		title = "Treats"
 		navigationController?.navigationBar.prefersLargeTitles = true
-		
-		NSLayoutConstraint.activate([
-			collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-			collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-			collectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-			collectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor)
-		])
 	}
 }
 
@@ -65,8 +60,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as! RecipeCell
 		let recipe = recipes[indexPath.row]
 		cell.recipeLabel.text = recipe.title
-		cell.readyInLabel.text = String(recipe.readyInMinutes)
-		cell.servingsLabel.text = String(recipe.servings)
+		cell.readyInLabel.text = "Ready In: \(String(recipe.readyInMinutes)) minutes"
+		cell.servingsLabel.text = "Serves: \(String(recipe.servings))"
 		cell.vegetarianImageView.image = UIImage(named: recipe.vegetarian ? "veg" : "non-veg")
 		
 		if recipeImageData[recipe.image] == nil {
