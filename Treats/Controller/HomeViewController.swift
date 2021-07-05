@@ -23,26 +23,30 @@ class HomeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let search = "pasta"
-		let maxFat = "25"
-		let number = "2"
-		
-		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
-			self.recipes = response
-		}
+//		let search = "soup"
+//		let maxFat = "15"
+//		let number = "10"
+//
+//		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
+//			self.recipes = response
+//		}
+		self.recipes = searchManager.getDataFromFile()!
 		setupViews()
 	}
 	
 	func setupViews() {
 		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "recipeCell")
-		collectionView.backgroundColor = .white
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
+		collectionView.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
+		view.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
 		view.addSubview(collectionView)
 		
 		title = "Treats"
 		navigationController?.navigationBar.prefersLargeTitles = true
+		navigationItem.backButtonTitle = "Back"
+		navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
 	}
 }
 
@@ -50,10 +54,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return recipes.count
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: UIScreen.main.bounds.size.width, height: 300)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,7 +84,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let recipeController = RecipeViewController()
 		recipeController.title = recipes[indexPath.row].title
-		present(recipeController, animated: true, completion: nil)
+		navigationController?.pushViewController(recipeController, animated: true)
 	}
 	
 	func getImageForCell(using url: URL, completion: @escaping(Data) -> Void) {

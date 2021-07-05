@@ -54,4 +54,28 @@ class SearchManager {
 		guard let safeData = response else { fatalError("Could not parse data.") }
 		return safeData.results
 	}
+	// use when API call limit exhausts
+	
+	func getDataFromFile() -> [Results]? {
+		if let path = Bundle.main.url(forResource: "test", withExtension: "json") {
+			do {
+				let response = try String(contentsOf: path).data(using: .utf8)
+				let results = parseJSONFromFile(using: response!)
+				return results
+			} catch {
+				print(error)
+			}
+		}
+		return nil
+	}
+	
+	func parseJSONFromFile(using data: Data) -> [Results]? {
+		do {
+			let decodedData = try JSONDecoder().decode(RecipeModel.self, from: data)
+			return decodedData.results
+		} catch {
+			print(error)
+		}
+		return nil
+	}
 }

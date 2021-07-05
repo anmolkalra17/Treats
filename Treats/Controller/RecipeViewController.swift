@@ -17,7 +17,8 @@ class RecipeViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		view.backgroundColor = .green
 		navigationItem.largeTitleDisplayMode = .never
-		stepsTextView.isEditable = false
+		navigationItem.backButtonTitle = "Back"
     }
 }
