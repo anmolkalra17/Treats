@@ -17,7 +17,6 @@ struct Results: Decodable {
 	let servings: Int
 	let title: String
 	let image: String
-	let summary: String
 	let nutrition: Nutrition
 	let analyzedInstructions: [AnalyzedInstruction]
 }

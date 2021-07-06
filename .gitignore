@@ -4,6 +4,7 @@
 */xcuserdata/
 *.idea
 */xcshareddata
+.DS_Store
 
 *.xcworkspace
 Treats/test.json

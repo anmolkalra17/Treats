@@ -17,8 +17,8 @@ class RecipeCell: UICollectionViewCell {
 		someView.layer.shadowRadius = 0.5
 		someView.layer.shadowOffset = CGSize(width: 3, height: 3)
 		someView.layer.shadowColor = UIColor.gray.cgColor
-		someView.layer.shadowOpacity = 0.2
-		someView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9176470588, blue: 0.8274509804, alpha: 1)
+		someView.layer.shadowOpacity = 0.3
+		someView.backgroundColor = UIColor(named: "backgroundColorGlobal")
 		return someView
 	}()
 	
@@ -35,7 +35,7 @@ class RecipeCell: UICollectionViewCell {
 		label.font = UIFont.boldSystemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 0
-		label.textColor = #colorLiteral(red: 0.1960784314, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 
@@ -50,7 +50,7 @@ class RecipeCell: UICollectionViewCell {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textColor = #colorLiteral(red: 0.1960784314, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 
@@ -58,7 +58,7 @@ class RecipeCell: UICollectionViewCell {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textColor = #colorLiteral(red: 0.1960784314, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 	
@@ -80,21 +80,19 @@ class RecipeCell: UICollectionViewCell {
 		mainView.addSubview(servingsLabel)
 		
 		NSLayoutConstraint.activate([
-			self.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-			self.heightAnchor.constraint(equalTo: mainView.heightAnchor),
-			
 			mainView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+			mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
 			mainView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+			mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
 			
-			imageView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 0),
-			imageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: 0),
-			imageView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 0),
-			imageView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -88),
+			imageView.topAnchor.constraint(equalTo: mainView.topAnchor),
+			imageView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+			imageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
 			
-			recipeLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+			recipeLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
 			recipeLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
 			
-			vegetarianImageView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+			vegetarianImageView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
 			vegetarianImageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -8),
 			vegetarianImageView.widthAnchor.constraint(equalToConstant: 30),
 			vegetarianImageView.heightAnchor.constraint(equalToConstant: 30),
@@ -103,7 +101,8 @@ class RecipeCell: UICollectionViewCell {
 			readyInLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
 			
 			servingsLabel.topAnchor.constraint(equalTo: readyInLabel.bottomAnchor, constant: 8),
-			servingsLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8)
+			servingsLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
+			servingsLabel.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -8)
 		])
 	}
 }

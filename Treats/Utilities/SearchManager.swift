@@ -26,6 +26,7 @@ class SearchManager {
 		]
 		
 		guard let url = components.url else { fatalError("Could not create URL.") }
+		print(url)
 		return url
 	}
 	

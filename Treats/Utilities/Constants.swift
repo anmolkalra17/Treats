@@ -8,8 +8,14 @@
 import Foundation
 
 struct Constants {
+	
+	//URL Constants
 	let apiKey = "d9d8433d696b4323bc5f6625bfc7644c"
 	let scheme = "https"
 	let host = "api.spoonacular.com"
 	let path = "/recipes/complexSearch"
+	
+	//Color Constants
+	let background = "backgroundColorGlobal"
+	let fontColor = "textColorGlobal"
 }

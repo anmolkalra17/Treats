@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
 	}
 	var recipeImageData = [String: Data]()
 	let searchManager = SearchManager()
+	let K = Constants()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,27 +40,33 @@ class HomeViewController: UIViewController {
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		collectionView.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
-		view.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
+//		collectionView.backgroundColor = .green
+		collectionView.backgroundColor = UIColor(named: K.background)
+		view.backgroundColor = UIColor(named: K.background)
 		view.addSubview(collectionView)
 		
 		title = "Treats"
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.backButtonTitle = "Back"
-		navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9607843137, blue: 0.9411764706, alpha: 1)
+		navigationController?.navigationBar.isTranslucent = true
+		navigationController?.navigationBar.backgroundColor = UIColor(named: K.background)
 	}
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return recipes.count
 	}
 	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: collectionView.frame.size.width, height: 400)
+	}
+	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as! RecipeCell
 		let recipe = recipes[indexPath.row]
-		cell.recipeLabel.text = recipe.title
+		cell.recipeLabel.text = recipe.title.capitalized
 		cell.readyInLabel.text = "Ready In: \(String(recipe.readyInMinutes)) minutes"
 		cell.servingsLabel.text = "Serves: \(String(recipe.servings))"
 		cell.vegetarianImageView.image = UIImage(named: recipe.vegetarian ? "veg" : "non-veg")
@@ -82,8 +89,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let recipeController = RecipeViewController()
+		guard let recipeController = storyboard?.instantiateViewController(withIdentifier: "Recipe") as? RecipeViewController else { return }
 		recipeController.title = recipes[indexPath.row].title
+		recipeController.imageData = recipeImageData[recipes[indexPath.row].image]
+		recipeController.recipes = recipes[indexPath.row]
+		recipeController.index = indexPath.row
 		navigationController?.pushViewController(recipeController, animated: true)
 	}
 	
