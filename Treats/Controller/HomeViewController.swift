@@ -31,6 +31,8 @@ class HomeViewController: UIViewController {
 //		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
 //			self.recipes = response
 //		}
+		
+		// Mock call: Remove later
 		self.recipes = searchManager.getDataFromFile()!
 		setupViews()
 	}
@@ -40,7 +42,6 @@ class HomeViewController: UIViewController {
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
-//		collectionView.backgroundColor = .green
 		collectionView.backgroundColor = UIColor(named: K.background)
 		view.backgroundColor = UIColor(named: K.background)
 		view.addSubview(collectionView)
@@ -60,7 +61,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.frame.size.width, height: 400)
+		return CGSize(width: collectionView.frame.size.width, height: 350)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

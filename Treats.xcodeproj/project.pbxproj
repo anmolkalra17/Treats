@@ -10,6 +10,9 @@
 		7B05DB5E26934578006A5102 /* NutrientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B05DB5D26934578006A5102 /* NutrientsViewController.swift */; };
 		7B93F21D269311200077D996 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B93F21C269311200077D996 /* test.json */; };
 		7BA54CB726943A270048E5D2 /* RecipeSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CB626943A270048E5D2 /* RecipeSteps.swift */; };
+		7BA54CB9269448E60048E5D2 /* NutritionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CB8269448E60048E5D2 /* NutritionData.swift */; };
+		7BA54CBB26944B1E0048E5D2 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CBA26944B1E0048E5D2 /* NutritionModel.swift */; };
+		7BA54CBD26944DE00048E5D2 /* nutrition.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BA54CBC26944DE00048E5D2 /* nutrition.json */; };
 		7BD475972691C2B000E92F14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD475962691C2B000E92F14 /* AppDelegate.swift */; };
 		7BD475992691C2B000E92F14 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD475982691C2B000E92F14 /* SceneDelegate.swift */; };
 		7BD4759B2691C2B000E92F14 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4759A2691C2B000E92F14 /* HomeViewController.swift */; };
@@ -28,6 +31,9 @@
 		7B05DB5D26934578006A5102 /* NutrientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientsViewController.swift; sourceTree = "<group>"; };
 		7B93F21C269311200077D996 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		7BA54CB626943A270048E5D2 /* RecipeSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSteps.swift; sourceTree = "<group>"; };
+		7BA54CB8269448E60048E5D2 /* NutritionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionData.swift; sourceTree = "<group>"; };
+		7BA54CBA26944B1E0048E5D2 /* NutritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModel.swift; sourceTree = "<group>"; };
+		7BA54CBC26944DE00048E5D2 /* nutrition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = nutrition.json; sourceTree = "<group>"; };
 		7BD475932691C2B000E92F14 /* Treats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD475962691C2B000E92F14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BD475982691C2B000E92F14 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 				7BD475A12691C2B200E92F14 /* LaunchScreen.storyboard */,
 				7BD475A42691C2B200E92F14 /* Info.plist */,
 				7B93F21C269311200077D996 /* test.json */,
+				7BA54CBC26944DE00048E5D2 /* nutrition.json */,
 			);
 			path = Treats;
 			sourceTree = "<group>";
@@ -95,6 +102,8 @@
 			children = (
 				7BD475B32691C45A00E92F14 /* RecipeModel.swift */,
 				7BA54CB626943A270048E5D2 /* RecipeSteps.swift */,
+				7BA54CB8269448E60048E5D2 /* NutritionData.swift */,
+				7BA54CBA26944B1E0048E5D2 /* NutritionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +203,7 @@
 				7BD475A32691C2B200E92F14 /* LaunchScreen.storyboard in Resources */,
 				7B93F21D269311200077D996 /* test.json in Resources */,
 				7BD475A02691C2B200E92F14 /* Assets.xcassets in Resources */,
+				7BA54CBD26944DE00048E5D2 /* nutrition.json in Resources */,
 				7BD4759E2691C2B000E92F14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,11 +218,13 @@
 				7BD4759B2691C2B000E92F14 /* HomeViewController.swift in Sources */,
 				7BD475972691C2B000E92F14 /* AppDelegate.swift in Sources */,
 				7BD475BC2691E15D00E92F14 /* NoResultsView.swift in Sources */,
+				7BA54CBB26944B1E0048E5D2 /* NutritionModel.swift in Sources */,
 				7BD475B62691CB4700E92F14 /* RecipeViewController.swift in Sources */,
 				7BD475B82691CC6300E92F14 /* RecipeCell.swift in Sources */,
 				7BD475B22691C3D800E92F14 /* SearchManager.swift in Sources */,
 				7BD475992691C2B000E92F14 /* SceneDelegate.swift in Sources */,
 				7BD475B02691C2F000E92F14 /* Constants.swift in Sources */,
+				7BA54CB9269448E60048E5D2 /* NutritionData.swift in Sources */,
 				7BA54CB726943A270048E5D2 /* RecipeSteps.swift in Sources */,
 				7BD475B42691C45A00E92F14 /* RecipeModel.swift in Sources */,
 				7B05DB5E26934578006A5102 /* NutrientsViewController.swift in Sources */,
@@ -372,7 +384,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anmol.Treats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -391,7 +403,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.anmol.Treats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

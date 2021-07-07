@@ -17,19 +17,11 @@ struct Results: Decodable {
 	let servings: Int
 	let title: String
 	let image: String
-	let nutrition: Nutrition
+	let vegan: Bool
+	let glutenFree: Bool
+	let dairyFree: Bool
+	let veryHealthy: Bool
 	let analyzedInstructions: [AnalyzedInstruction]
-}
-
-struct Nutrition: Decodable {
-	let nutrients: [Nutrient]
-}
-
-struct Nutrient: Decodable {
-	let title: String
-	let name: String
-	let amount: Double
-	let unit: String
 }
 
 struct AnalyzedInstruction: Decodable {
@@ -41,14 +33,8 @@ struct Step: Decodable {
 	let number: Int
 	let step: String
 	let ingredients, equipment: [Ent]
-	let length: Length?
 }
 
 struct Ent: Decodable {
 	let name: String
-}
-
-struct Length: Decodable {
-	let number: Int
-	let unit: String
 }

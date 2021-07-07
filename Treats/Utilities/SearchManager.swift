@@ -30,6 +30,23 @@ class SearchManager {
 		return url
 	}
 	
+	func createNutritionURL(for recipeName: String) -> URL {
+		var components = URLComponents()
+		components.scheme = K.scheme
+		components.host = K.host
+		components.path = K.nutritionPath
+		
+		let searchString = recipeName.replacingOccurrences(of: " ", with: "+")
+		components.queryItems = [
+			URLQueryItem(name: "apiKey", value: K.apiKey),
+			URLQueryItem(name: "title", value: searchString)
+		]
+		
+		guard let url = components.url else { fatalError("Could not create nutrition URL.") }
+		print(url)
+		return url
+	}
+	
 	func getRecipeData(for food: String, maxFat: String?, numberOfResults: String?, completion: @escaping ([Results]) -> Void) {
 		let url = createURL(for: food, maxFat: maxFat ?? "", number: numberOfResults ?? "")
 		let session = URLSession.shared
@@ -55,7 +72,37 @@ class SearchManager {
 		guard let safeData = response else { fatalError("Could not parse data.") }
 		return safeData.results
 	}
-	// use when API call limit exhausts
+	
+	//	Getting nutrition data
+	
+	func getNutritionData(for recipeName: String, completion: @escaping (NutritionModel) -> Void) {
+		let url = createNutritionURL(for: recipeName)
+		let session = URLSession.shared
+		session.dataTask(with: url) { data, response, error in
+			if let e = error {
+				print(e)
+			}
+			
+			if let safeData = data {
+				if let nutritionInfo = self.parseNutritionJSON(using: safeData) {
+					completion(nutritionInfo)
+				}
+			}
+		}.resume()
+	}
+	
+	func parseNutritionJSON(using data: Data) -> NutritionModel? {
+		var nutritonData: NutritionModel!
+		do {
+			nutritonData = try JSONDecoder().decode(NutritionModel.self, from: data)
+			return nutritonData
+		} catch {
+			print(error)
+		}
+		return nil
+	}
+	
+	// Use when API call limit exceeds (mock method calls using local json from app bundle)
 	
 	func getDataFromFile() -> [Results]? {
 		if let path = Bundle.main.url(forResource: "test", withExtension: "json") {
@@ -74,6 +121,29 @@ class SearchManager {
 		do {
 			let decodedData = try JSONDecoder().decode(RecipeModel.self, from: data)
 			return decodedData.results
+		} catch {
+			print(error)
+		}
+		return nil
+	}
+	
+	func getNutritionDataFromFile() -> NutritionModel? {
+		if let path = Bundle.main.url(forResource: "nutrition", withExtension: "json") {
+			do {
+				let response = try String(contentsOf: path).data(using: .utf8)
+				let results = parseNutritionFromFile(using: response!)
+				return results
+			} catch {
+				print(error)
+			}
+		}
+		return nil
+	}
+	
+	func parseNutritionFromFile(using data: Data) -> NutritionModel? {
+		do {
+			let decodedData = try JSONDecoder().decode(NutritionModel.self, from: data)
+			return decodedData
 		} catch {
 			print(error)
 		}

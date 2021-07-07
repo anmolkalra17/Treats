@@ -91,6 +91,7 @@ class RecipeCell: UICollectionViewCell {
 			
 			recipeLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
 			recipeLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
+			recipeLabel.widthAnchor.constraint(equalToConstant: 300),
 			
 			vegetarianImageView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
 			vegetarianImageView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -8),

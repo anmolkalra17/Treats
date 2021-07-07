@@ -23,15 +23,20 @@ class RecipeViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setupView()
+//		print(setupIngredients(using: recipes!))
+//		print(setupEquipments(using: recipes!))
 	}
 	
 	func setupView() {
 		navigationItem.largeTitleDisplayMode = .never
-		navigationItem.backButtonTitle = "Back"
+		title = recipes?.title.capitalized
+		navigationItem.backButtonTitle = "Recipe"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(showNutrientsInfo))
 		
 		view.backgroundColor = UIColor(named: K.background)
 		imageView.image = UIImage(data: imageData!)
+		imageView.layer.cornerRadius = 16
+		imageView.contentMode = .scaleToFill
 		readyInTextLabel.text = "⏳ \(String(recipes!.readyInMinutes)) mintues"
 		readyInTextLabel.textColor = UIColor(named: K.fontColor)
 		servesPeopleLabel.text = "Serves: \(String(recipes!.servings)) people"
@@ -48,7 +53,13 @@ class RecipeViewController: UIViewController {
 	
 	@objc func showNutrientsInfo() {
 		guard let nutrientsVC = storyboard?.instantiateViewController(withIdentifier: "Nutrients") as? NutrientsViewController else { return }
-		present(nutrientsVC, animated: true, completion: nil)
+		nutrientsVC.dairyFree = recipes?.dairyFree
+		nutrientsVC.vegan = recipes?.vegan
+		nutrientsVC.glutenFree = recipes?.glutenFree
+		nutrientsVC.veryHealthy = recipes?.veryHealthy
+		nutrientsVC.recipeName = recipes?.title
+		navigationController?.pushViewController(nutrientsVC, animated: true)
+//		present(nutrientsVC, animated: true, completion: nil)
 	}
 	
 	func setupRecipeSteps(using recipe: Results) -> String? {
@@ -56,13 +67,7 @@ class RecipeViewController: UIViewController {
 		var finalStep = ""
 		
 		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
-//			let equipmentName = recipe.analyzedInstructions.first?.steps[i].equipment[i].name
-//			let ingredientName = recipe.analyzedInstructions.first?.steps[i].ingredients[i].name
 			let step = recipe.analyzedInstructions.first?.steps[i].step
-			
-//			recipeSteps.equipments.append(equipmentName ?? "")
-//			recipeSteps.ingredients.append(ingredientName ?? "")
-			
 			recipeSteps.stepsToFollow.updateValue(step ?? "" + "\n" , forKey: i + 1)
 		}
 		
@@ -72,4 +77,22 @@ class RecipeViewController: UIViewController {
 		}
 		return finalStep
 	}
+	
+//	func setupEquipments(using recipe: Results) -> [String] {
+//		var recipeSteps = RecipeSteps(recipe: recipe)
+//		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
+//			let equipmentName = recipe.analyzedInstructions.first?.steps[i].equipment[i].name
+//			recipeSteps.equipments.append(equipmentName ?? "")
+//		}
+//		return recipeSteps.equipments
+//	}
+//
+//	func setupIngredients(using recipe: Results) -> [String] {
+//		var recipeSteps = RecipeSteps(recipe: recipe)
+//		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
+//			let ingredientName = recipe.analyzedInstructions.first?.steps[i].ingredients[i].name
+//			recipeSteps.equipments.append(ingredientName ?? "")
+//		}
+//		return recipeSteps.ingredients
+//	}
 }

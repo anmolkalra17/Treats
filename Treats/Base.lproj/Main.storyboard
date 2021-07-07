@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aWf-Lb-Lw1">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Treats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="epu-gM-KC9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VKz-d5-Cwm">
                                     <size key="itemSize" width="398" height="250"/>
@@ -28,7 +28,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeCell" id="7pS-dP-d2N" customClass="RecipeCell" customModule="Treats" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="0.0" width="398" height="250"/>
+                                        <rect key="frame" x="-4" y="0.0" width="398" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xT3-h3-Mjd">
                                             <rect key="frame" x="0.0" y="0.0" width="398" height="250"/>
@@ -61,27 +61,27 @@
             <objects>
                 <viewController storyboardIdentifier="Recipe" id="VvG-ZG-J0x" customClass="RecipeViewController" customModule="Treats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NaH-Oc-yKL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVE-i2-slM">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MDp-Mn-aQr">
-                                        <rect key="frame" x="16" y="16" width="382" height="222"/>
+                                        <rect key="frame" x="16" y="16" width="358" height="222"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="222" id="eoG-fq-Tvk"/>
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="RECIPE STEPS GO HERE..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eiZ-HE-dBg">
-                                        <rect key="frame" x="16" y="334" width="382" height="468"/>
+                                        <rect key="frame" x="16" y="334" width="358" height="416"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="X7G-I9-LLg">
-                                        <rect key="frame" x="58.5" y="261" width="297" height="40"/>
+                                        <rect key="frame" x="46.666666666666657" y="246" width="297" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⏳ 45 Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pga-iD-mK2">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
@@ -110,16 +110,27 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS TO FOLLOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-Jd-w3y">
+                                        <rect key="frame" x="120.66666666666667" y="294" width="148.66666666666663" height="19.333333333333314"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="bw5-Nf-aCC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="MDp-Mn-aQr" firstAttribute="leading" secondItem="HVE-i2-slM" secondAttribute="leading" constant="16" id="0Af-Ei-Jt2"/>
+                                    <constraint firstItem="CkO-Jd-w3y" firstAttribute="top" secondItem="X7G-I9-LLg" secondAttribute="bottom" constant="8" symbolic="YES" id="0q3-ac-yBS"/>
                                     <constraint firstAttribute="bottom" secondItem="eiZ-HE-dBg" secondAttribute="bottom" constant="16" id="9f1-Lu-bzb"/>
-                                    <constraint firstItem="eiZ-HE-dBg" firstAttribute="top" secondItem="X7G-I9-LLg" secondAttribute="bottom" constant="33" id="Z4b-rN-NMv"/>
-                                    <constraint firstItem="X7G-I9-LLg" firstAttribute="top" secondItem="MDp-Mn-aQr" secondAttribute="bottom" constant="23" id="ffa-he-2Oc"/>
+                                    <constraint firstItem="X7G-I9-LLg" firstAttribute="top" secondItem="MDp-Mn-aQr" secondAttribute="bottom" constant="8" id="ffa-he-2Oc"/>
+                                    <constraint firstItem="eiZ-HE-dBg" firstAttribute="top" secondItem="CkO-Jd-w3y" secondAttribute="bottom" constant="20.5" id="fsB-fh-dNy"/>
                                     <constraint firstItem="MDp-Mn-aQr" firstAttribute="top" secondItem="HVE-i2-slM" secondAttribute="top" constant="16" id="gVN-iL-aQ2"/>
                                     <constraint firstAttribute="trailing" secondItem="eiZ-HE-dBg" secondAttribute="trailing" constant="16" id="jKI-Go-YFZ"/>
                                     <constraint firstItem="X7G-I9-LLg" firstAttribute="centerX" secondItem="HVE-i2-slM" secondAttribute="centerX" id="mBG-JN-grT"/>
                                     <constraint firstItem="eiZ-HE-dBg" firstAttribute="leading" secondItem="HVE-i2-slM" secondAttribute="leading" constant="16" id="n7e-ye-TJc"/>
+                                    <constraint firstItem="CkO-Jd-w3y" firstAttribute="centerX" secondItem="HVE-i2-slM" secondAttribute="centerX" id="og7-bl-KtM"/>
                                     <constraint firstAttribute="trailing" secondItem="MDp-Mn-aQr" secondAttribute="trailing" constant="16" id="yU9-jZ-LO8"/>
                                 </constraints>
                             </view>
@@ -144,7 +155,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjL-4r-9eg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1890" y="54"/>
+            <point key="canvasLocation" x="1889.8550724637682" y="53.571428571428569"/>
+        </scene>
+        <!--Nutrients View Controller-->
+        <scene sceneID="jeB-QB-7zj">
+            <objects>
+                <tableViewController storyboardIdentifier="Nutrients" id="8HI-hv-26T" customClass="NutrientsViewController" customModule="Treats" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W6e-hl-anj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="nutrientsCell" textLabel="6oB-Ik-wDx" imageView="Kvt-qe-yd1" rowHeight="70" style="IBUITableViewCellStyleDefault" id="EFg-WZ-cPL" customClass="NutrientsCell" customModule="Treats" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EFg-WZ-cPL" id="Z0p-Qx-JPe">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Carbohydrates : 100g" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6oB-Ik-wDx">
+                                            <rect key="frame" x="105" y="0.0" width="265" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="carbs" id="Kvt-qe-yd1">
+                                            <rect key="frame" x="20" y="0.0" width="70" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="8HI-hv-26T" id="5Ar-h9-Qxc"/>
+                            <outlet property="delegate" destination="8HI-hv-26T" id="C8O-5x-sfw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mjl-Mh-uV1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2813.8461538461538" y="52.606635071090047"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MfY-gN-8qA">
@@ -152,7 +205,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aWf-Lb-Lw1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="x79-fX-Myf">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -164,23 +217,9 @@
             </objects>
             <point key="canvasLocation" x="105.79710144927537" y="53.571428571428569"/>
         </scene>
-        <!--Nutrients View Controller-->
-        <scene sceneID="DTe-OG-FsD">
-            <objects>
-                <viewController storyboardIdentifier="Nutrients" id="2Cf-3K-7Ku" customClass="NutrientsViewController" customModule="Treats" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="v9X-sm-rY3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="xPu-0K-MeH"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iAX-OC-1cu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2792.753623188406" y="53.571428571428569"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="carbs" width="512" height="512"/>
         <image name="non-veg" width="100" height="100"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

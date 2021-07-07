@@ -1,0 +1,39 @@
+{
+  "recipesUsed": 2,
+  "calories": {
+	"value": 184,
+	"unit": "calories",
+	"confidenceRange95Percent": {
+	  "min": 46.61,
+	  "max": 322.18
+	},
+	"standardDeviation": 99.42
+  },
+  "fat": {
+	"value": 4,
+	"unit": "g",
+	"confidenceRange95Percent": {
+	  "min": -0.34,
+	  "max": 7.47
+	},
+	"standardDeviation": 2.82
+  },
+  "protein": {
+	"value": 7,
+	"unit": "g",
+	"confidenceRange95Percent": {
+	  "min": 3.8,
+	  "max": 9.83
+	},
+	"standardDeviation": 2.17
+  },
+  "carbs": {
+	"value": 33,
+	"unit": "g",
+	"confidenceRange95Percent": {
+	  "min": 8.95,
+	  "max": 57.59
+	},
+	"standardDeviation": 17.55
+  }
+}
