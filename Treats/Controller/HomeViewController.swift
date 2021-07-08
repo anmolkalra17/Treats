@@ -10,6 +10,16 @@ import UIKit
 class HomeViewController: UIViewController {
 	
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var searchBar: UISearchBar!
+	@IBOutlet weak var spinner: UIImageView! {
+		didSet {
+			spinner.image = UIImage(named: "pizza_loader.png")
+		}
+	}
+	
+	let searchManager = SearchManager()
+	let K = Constants()
+	
 	var recipes = [Results]() {
 		didSet {
 			DispatchQueue.main.async {
@@ -18,31 +28,45 @@ class HomeViewController: UIViewController {
 		}
 	}
 	var recipeImageData = [String: Data]()
-	let searchManager = SearchManager()
-	let K = Constants()
+	var timer: Timer?
+	var search: String?
+	var number: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let search = "pizza"
-		let maxFat = "99"
-		let number = "10"
+		search = "soup"
+		number = "10"
 
-		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
-			self.recipes = response
-		}
+//		searchManager.getRecipeData(for: search!, numberOfResults: number) { response in
+//			self.recipes = response
+//			DispatchQueue.main.async { [weak self] in
+//				self?.stopTimer()
+//				self?.collectionView.isHidden = false
+//			}
+//		}
 		
 		// Mock call: Remove later
-//		self.recipes = searchManager.getDataFromFile()!
+		searchManager.getDataFromFile { response in
+			self.recipes = response
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+				self?.stopTimer()
+				self?.collectionView.isHidden = false
+			}
+		}
 		setupViews()
 	}
 	
 	func setupViews() {
+		startTimer()
+		collectionView.isHidden = true
 		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: K.collectionCellID)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		collectionView.backgroundColor = UIColor(named: K.background)
+		searchBar.delegate = self
+		searchBar.backgroundColor = UIColor(named: K.background)
 		view.backgroundColor = UIColor(named: K.background)
 		view.addSubview(collectionView)
 		
@@ -51,6 +75,30 @@ class HomeViewController: UIViewController {
 		navigationItem.backButtonTitle = "Back"
 		navigationController?.navigationBar.isTranslucent = true
 		navigationController?.navigationBar.backgroundColor = UIColor(named: K.background)
+	}
+	
+	func startTimer() {
+		spinner.isHidden = false
+		if timer == nil {
+			timer = Timer.scheduledTimer(timeInterval:0.0, target: self, selector: #selector(self.animateView), userInfo: nil, repeats: false)
+		}
+	}
+	
+	@objc func animateView() {
+		UIView.animate(withDuration: 0.8, delay: 0.0, options: .curveLinear, animations: {
+			self.spinner.transform = self.spinner.transform.rotated(by: CGFloat(Double.pi))
+		}, completion: { (finished) in
+			if self.timer != nil {
+				self.timer = Timer.scheduledTimer(timeInterval:0.0, target: self, selector: #selector(self.animateView), userInfo: nil, repeats: false)
+			}
+		})
+	}
+	
+	func stopTimer() {
+		timer?.invalidate()
+		collectionView.isHidden = false
+		timer = nil
+		spinner.isHidden = true
 	}
 }
 
@@ -103,5 +151,32 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 			guard let safeData = data else { return }
 			completion(safeData)
 		}.resume()
+	}
+}
+
+extension HomeViewController: UISearchBarDelegate {
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		collectionView.isHidden = true
+		timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
+		searchBar.resignFirstResponder()
+	}
+	
+	@objc func callAPI() {
+		let searchString = searchBar.text!
+		
+		DispatchQueue.main.async { [weak self] in
+			self?.startTimer()
+		}
+		
+		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+			self?.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
+				self?.recipes = response
+				DispatchQueue.main.async {
+					self?.stopTimer()
+					self?.collectionView.isHidden = false
+				}
+			}
+			self?.timer?.invalidate()
+		}
 	}
 }

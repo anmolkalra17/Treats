@@ -12,7 +12,7 @@ class SearchManager {
 	let K = Constants()
 	static let instance = SearchManager()
 	
-	func createURL(for searchString: String, maxFat: String?, number: String?) -> URL {
+	func createURL(for searchString: String, number: String?) -> URL {
 		var components = URLComponents()
 		components.scheme = K.scheme
 		components.host = K.host
@@ -20,7 +20,6 @@ class SearchManager {
 		components.queryItems = [
 			URLQueryItem(name: "apiKey", value: K.apiKey),
 			URLQueryItem(name: "query", value: searchString),
-			URLQueryItem(name: "maxFat", value: maxFat ?? ""),
 			URLQueryItem(name: "number", value: number ?? ""),
 			URLQueryItem(name: "addRecipeInformation", value: "true")
 		]
@@ -47,8 +46,8 @@ class SearchManager {
 		return url
 	}
 	
-	func getRecipeData(for food: String, maxFat: String?, numberOfResults: String?, completion: @escaping ([Results]) -> Void) {
-		let url = createURL(for: food, maxFat: maxFat ?? "", number: numberOfResults ?? "")
+	func getRecipeData(for food: String, numberOfResults: String?, completion: @escaping ([Results]) -> Void) {
+		let url = createURL(for: food, number: numberOfResults ?? "")
 		let session = URLSession.shared
 		session.dataTask(with: url) { data, response, error in
 			if let e = error {
@@ -104,17 +103,16 @@ class SearchManager {
 	
 	// Use when API call limit exceeds (mock method calls using local json from app bundle)
 	
-	func getDataFromFile() -> [Results]? {
+	func getDataFromFile(completion: @escaping ([Results]) -> Void) {
 		if let path = Bundle.main.url(forResource: "test", withExtension: "json") {
 			do {
 				let response = try String(contentsOf: path).data(using: .utf8)
-				let results = parseJSONFromFile(using: response!)
-				return results
+				guard let results = parseJSONFromFile(using: response!) else { return }
+				completion(results)
 			} catch {
 				print(error)
 			}
 		}
-		return nil
 	}
 	
 	func parseJSONFromFile(using data: Data) -> [Results]? {

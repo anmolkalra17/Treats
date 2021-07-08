@@ -76,12 +76,13 @@ class RecipeViewController: UIViewController {
 		var recipeSteps = RecipeSteps(recipe: recipe)
 		var finalStep = ""
 		
-		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
+		guard let dataCount = recipe.analyzedInstructions.first?.steps.count else { return "Error in data count" }
+		for i in 0...dataCount - 1 {
 			let step = recipe.analyzedInstructions.first?.steps[i].step
 			recipeSteps.stepsToFollow.updateValue(step ?? "" + "\n" , forKey: i + 1)
 		}
 		
-		for i in 0...recipeSteps.stepsToFollow.count - 1 {
+		for i in 0...dataCount - 1 {
 			guard let step = recipeSteps.stepsToFollow[i + 1] else { return nil }
 			finalStep += "Step \(i + 1): \(step) \n \n"
 		}

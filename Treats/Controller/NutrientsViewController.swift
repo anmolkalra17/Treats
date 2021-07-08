@@ -26,22 +26,20 @@ class NutrientsViewController: UITableViewController {
 	var dairyFree: Bool?
 	var veryHealthy: Bool?
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 
 		searchManager.getNutritionData(for: recipeName ?? "") { response in
 			self.nutritionData = NutritionData(calories: response.calories.value, fat: response.fat.value, protein: response.protein.value, carbs: response.carbs.value, caloriesUnit: response.calories.unit, fatUnit: response.fat.unit, protienUnit: response.protein.unit, carbsUnit: response.carbs.unit)
 			print(self.nutritionData!)
-			
-			// TODO: Handle Error
 		}
 		
 		// Mock call: Remove later
-//		if let x = searchManager.getNutritionDataFromFile() {
-//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
-//			print(nutritionData!)
-//		}
-    }
+		//		if let x = searchManager.getNutritionDataFromFile() {
+		//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
+		//			print(nutritionData!)
+		//		}
+	}
 	
 	func setupView() {
 		navigationItem.backButtonTitle = "Recipe"
@@ -69,6 +67,7 @@ class NutrientsViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsCell", for: indexPath)
+		//TODO: - Handle Errors
 		switch indexPath.row {
 		case 0:
 			cell.textLabel?.text = "Calories: \(nutritionData?.calories ?? 0) \(nutritionData?.caloriesUnit ?? "")"

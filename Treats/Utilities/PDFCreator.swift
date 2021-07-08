@@ -46,9 +46,12 @@ class PDFCreator: NSObject {
 	}
 	
 	func addTitle(pageRect: CGRect) -> CGFloat {
-		let titleFont = UIFont.systemFont(ofSize: 18.0, weight: .bold)
-		let titleAttributes: [NSAttributedString.Key: Any] =
-			[NSAttributedString.Key.font: titleFont]
+		let titleFont = UIFont.systemFont(ofSize: 16.0, weight: .bold)
+		let titleAttributes: [NSAttributedString.Key: Any] = [
+			NSAttributedString.Key.font: titleFont,
+			NSAttributedString.Key.underlineColor: UIColor.black,
+			NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue,
+		]
 		let attributedTitle = NSAttributedString(
 			string: "\(title) (\(vegetarian ? "Veg." : "Non-Veg."))",
 			attributes: titleAttributes
@@ -56,7 +59,7 @@ class PDFCreator: NSObject {
 		let titleStringSize = attributedTitle.size()
 		let titleStringRect = CGRect(
 			x: (pageRect.width - titleStringSize.width) / 2.0,
-			y: 36,
+			y: 32,
 			width: titleStringSize.width,
 			height: titleStringSize.height
 		)
@@ -65,8 +68,8 @@ class PDFCreator: NSObject {
 	}
 	
 	func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
-		let maxHeight = pageRect.height * 0.4
-		let maxWidth = pageRect.width * 0.8
+		let maxHeight = pageRect.height * 0.40
+		let maxWidth = pageRect.width * 0.60
 		let aspectWidth = maxWidth / image.size.width
 		let aspectHeight = maxHeight / image.size.height
 		let aspectRatio = min(aspectWidth, aspectHeight)
@@ -92,9 +95,9 @@ class PDFCreator: NSObject {
 			attributes: textAttributes
 		)
 		let textRect = CGRect(
-			x: 10,
+			x: 20,
 			y: textTop,
-			width: pageRect.width - 20,
+			width: pageRect.width - 40,
 			height: pageRect.height - textTop
 		)
 		attributedText.draw(in: textRect)
