@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
 	}
 	var recipeImageData = [String: Data]()
 	var timer: Timer?
+	var timer2: Timer?
 	var search: String?
 	var number: String?
 	
@@ -66,7 +67,8 @@ class HomeViewController: UIViewController {
 		collectionView.dataSource = self
 		collectionView.backgroundColor = UIColor(named: K.background)
 		searchBar.delegate = self
-		searchBar.backgroundColor = UIColor(named: K.background)
+		searchBar.tintColor = UIColor(named: K.background)
+		searchBar.isTranslucent = false
 		view.backgroundColor = UIColor(named: K.background)
 		view.addSubview(collectionView)
 		
@@ -156,27 +158,33 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: UISearchBarDelegate {
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		collectionView.isHidden = true
-		timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
+		DispatchQueue.main.async { [weak self] in
+			self?.startTimer()
+			self?.collectionView.isHidden = true
+		}
+		timer2 = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
 		searchBar.resignFirstResponder()
 	}
 	
 	@objc func callAPI() {
-		let searchString = searchBar.text!
-		
-		DispatchQueue.main.async { [weak self] in
-			self?.startTimer()
-		}
-		
+//		let searchString = searchBar.text!
 		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-			self?.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
+//			self?.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
+//				self?.recipes = response
+//				DispatchQueue.main.async {
+//					self?.stopTimer()
+//					self?.collectionView.isHidden = false
+//				}
+//			}
+			
+			self?.searchManager.getDataFromFile(completion: { response in
 				self?.recipes = response
-				DispatchQueue.main.async {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
 					self?.stopTimer()
 					self?.collectionView.isHidden = false
 				}
-			}
-			self?.timer?.invalidate()
+			})
+			self?.timer2?.invalidate()
 		}
 	}
 }

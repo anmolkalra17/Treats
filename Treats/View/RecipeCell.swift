@@ -25,6 +25,7 @@ class RecipeCell: UICollectionViewCell {
 	let imageView: UIImageView = {
 		let imageView = UIImageView()
 		imageView.contentMode = .scaleToFill
+		imageView.layer.masksToBounds = true
 		imageView.layer.cornerRadius = 16
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
