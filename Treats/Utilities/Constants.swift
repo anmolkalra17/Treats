@@ -19,4 +19,10 @@ struct Constants {
 	//Color Constants
 	let background = "backgroundColorGlobal"
 	let fontColor = "textColorGlobal"
+	
+	//CollectionView Cell Identifier
+	let collectionCellID = "recipeCell"
+	
+	//TableView Cell Identifier
+	let tableCellID = "nutrientsCell"
 }

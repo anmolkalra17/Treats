@@ -166,7 +166,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="nutrientsCell" textLabel="6oB-Ik-wDx" imageView="Kvt-qe-yd1" rowHeight="70" style="IBUITableViewCellStyleDefault" id="EFg-WZ-cPL" customClass="NutrientsCell" customModule="Treats" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="nutrientsCell" textLabel="6oB-Ik-wDx" imageView="Kvt-qe-yd1" rowHeight="70" style="IBUITableViewCellStyleDefault" id="EFg-WZ-cPL">
                                 <rect key="frame" x="0.0" y="24.333333969116211" width="390" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EFg-WZ-cPL" id="Z0p-Qx-JPe">

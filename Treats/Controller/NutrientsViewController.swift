@@ -10,6 +10,7 @@ import UIKit
 class NutrientsViewController: UITableViewController {
 	
 	let searchManager = SearchManager()
+	let K = Constants()
 	var recipeName: String?
 	var recipe: Results?
 	var nutritionData: NutritionData? {
@@ -42,8 +43,8 @@ class NutrientsViewController: UITableViewController {
 	
 	func setupView() {
 		navigationItem.backButtonTitle = "Recipe"
+		navigationItem.title = "Nutritional Information"
 		tableView.rowHeight = 70
-		tableView.separatorStyle = .singleLine
 	}
 
 	func setTintColor(for value: Bool) -> UIColor {

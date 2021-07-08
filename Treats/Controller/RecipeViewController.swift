@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PDFKit
 
 class RecipeViewController: UIViewController {
 	@IBOutlet weak var imageView: UIImageView!
@@ -23,15 +24,15 @@ class RecipeViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setupView()
-//		print(setupIngredients(using: recipes!))
-//		print(setupEquipments(using: recipes!))
 	}
 	
 	func setupView() {
 		navigationItem.largeTitleDisplayMode = .never
 		title = recipes?.title.capitalized
 		navigationItem.backButtonTitle = "Recipe"
-		navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(showNutrientsInfo))
+		let infoButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(showNutrientsInfo))
+		let shareRecipeButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareRecipe))
+		navigationItem.rightBarButtonItems = [shareRecipeButton, infoButton]
 		
 		view.backgroundColor = UIColor(named: K.background)
 		imageView.image = UIImage(data: imageData!)
@@ -59,7 +60,16 @@ class RecipeViewController: UIViewController {
 		nutrientsVC.veryHealthy = recipes?.veryHealthy
 		nutrientsVC.recipeName = recipes?.title
 		navigationController?.pushViewController(nutrientsVC, animated: true)
-//		present(nutrientsVC, animated: true, completion: nil)
+	}
+	
+	@objc func shareRecipe() {
+		print("share tapped")
+		let shareString = "\(setupRecipeSteps(using: recipes!)!)"
+		let shareImage = UIImage(data: imageData!)
+		let pdfData = PDFCreator(title: recipes!.title, body: shareString, image: shareImage!)
+		let pdf = pdfData.createFlyer()
+		let shareAlert = UIActivityViewController(activityItems: [pdf], applicationActivities: [])
+		present(shareAlert, animated: true, completion: nil)
 	}
 	
 	func setupRecipeSteps(using recipe: Results) -> String? {
@@ -77,22 +87,4 @@ class RecipeViewController: UIViewController {
 		}
 		return finalStep
 	}
-	
-//	func setupEquipments(using recipe: Results) -> [String] {
-//		var recipeSteps = RecipeSteps(recipe: recipe)
-//		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
-//			let equipmentName = recipe.analyzedInstructions.first?.steps[i].equipment[i].name
-//			recipeSteps.equipments.append(equipmentName ?? "")
-//		}
-//		return recipeSteps.equipments
-//	}
-//
-//	func setupIngredients(using recipe: Results) -> [String] {
-//		var recipeSteps = RecipeSteps(recipe: recipe)
-//		for i in 0...recipe.analyzedInstructions.first!.steps.count - 1 {
-//			let ingredientName = recipe.analyzedInstructions.first?.steps[i].ingredients[i].name
-//			recipeSteps.equipments.append(ingredientName ?? "")
-//		}
-//		return recipeSteps.ingredients
-//	}
 }

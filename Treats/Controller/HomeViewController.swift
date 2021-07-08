@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
 	}
 	
 	func setupViews() {
-		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: "recipeCell")
+		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: K.collectionCellID)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -65,7 +65,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as! RecipeCell
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.collectionCellID, for: indexPath) as! RecipeCell
 		let recipe = recipes[indexPath.row]
 		cell.recipeLabel.text = recipe.title.capitalized
 		cell.readyInLabel.text = "Ready In: \(String(recipe.readyInMinutes)) minutes"
