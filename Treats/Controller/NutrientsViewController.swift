@@ -32,6 +32,8 @@ class NutrientsViewController: UITableViewController {
 		searchManager.getNutritionData(for: recipeName ?? "") { response in
 			self.nutritionData = NutritionData(calories: response.calories.value, fat: response.fat.value, protein: response.protein.value, carbs: response.carbs.value, caloriesUnit: response.calories.unit, fatUnit: response.fat.unit, protienUnit: response.protein.unit, carbsUnit: response.carbs.unit)
 			print(self.nutritionData!)
+			
+			// TODO: Handle Error
 		}
 		
 		// Mock call: Remove later

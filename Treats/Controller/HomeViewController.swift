@@ -24,16 +24,16 @@ class HomeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-//		let search = "soup"
-//		let maxFat = "15"
-//		let number = "10"
-//
-//		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
-//			self.recipes = response
-//		}
+		let search = "pizza"
+		let maxFat = "99"
+		let number = "10"
+
+		searchManager.getRecipeData(for: search, maxFat: maxFat, numberOfResults: number) { response in
+			self.recipes = response
+		}
 		
 		// Mock call: Remove later
-		self.recipes = searchManager.getDataFromFile()!
+//		self.recipes = searchManager.getDataFromFile()!
 		setupViews()
 	}
 	

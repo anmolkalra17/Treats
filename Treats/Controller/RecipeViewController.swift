@@ -66,7 +66,7 @@ class RecipeViewController: UIViewController {
 		print("share tapped")
 		let shareString = "\(setupRecipeSteps(using: recipes!)!)"
 		let shareImage = UIImage(data: imageData!)
-		let pdfData = PDFCreator(title: recipes!.title, body: shareString, image: shareImage!)
+		let pdfData = PDFCreator(title: recipes!.title.capitalized, body: shareString, image: shareImage!, vegetarian: recipes!.vegetarian)
 		let pdf = pdfData.createFlyer()
 		let shareAlert = UIActivityViewController(activityItems: [pdf], applicationActivities: [])
 		present(shareAlert, animated: true, completion: nil)

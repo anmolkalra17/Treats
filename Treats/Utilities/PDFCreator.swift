@@ -13,18 +13,20 @@ class PDFCreator: NSObject {
 	let title: String
 	let body: String
 	let image: UIImage
+	let vegetarian: Bool
 	
-	init(title: String, body: String, image: UIImage) {
+	init(title: String, body: String, image: UIImage, vegetarian: Bool) {
 		self.title = title
 		self.body = body
 		self.image = image
+		self.vegetarian = vegetarian
 	}
 	
 	func createFlyer() -> Data {
 		let pdfMetaData = [
 			kCGPDFContextCreator: "Treats",
 			kCGPDFContextAuthor: "Treats App",
-			kCGPDFContextTitle: title
+			kCGPDFContextTitle: "\(title) (\(vegetarian ? "Veg." : "Non-Veg."))"
 		]
 		let format = UIGraphicsPDFRendererFormat()
 		format.documentInfo = pdfMetaData as [String: Any]
@@ -48,7 +50,7 @@ class PDFCreator: NSObject {
 		let titleAttributes: [NSAttributedString.Key: Any] =
 			[NSAttributedString.Key.font: titleFont]
 		let attributedTitle = NSAttributedString(
-			string: title,
+			string: "\(title) (\(vegetarian ? "Veg." : "Non-Veg."))",
 			attributes: titleAttributes
 		)
 		let titleStringSize = attributedTitle.size()
