@@ -39,27 +39,27 @@ class HomeViewController: UIViewController {
 		search = "soup"
 		number = "10"
 
-//		searchManager.getRecipeData(for: search!, numberOfResults: number) { response in
-//			self.recipes = response
-//			DispatchQueue.main.async { [weak self] in
-//				self?.stopTimer()
-//				self?.collectionView.isHidden = false
-//			}
-//		}
-		
-		// Mock call: Remove later
-		searchManager.getDataFromFile { response in
+		searchManager.getRecipeData(for: search!, numberOfResults: number) { response in
 			self.recipes = response
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-				self?.stopTimer()
+			DispatchQueue.main.async { [weak self] in
+				self?.stopAnimation()
 				self?.collectionView.isHidden = false
 			}
 		}
+		
+//	    Mock call: Remove later
+//		searchManager.getDataFromFile { response in
+//			self.recipes = response
+//			DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+//				self?.stopAnimation()
+//				self?.collectionView.isHidden = false
+//			}
+//		}
 		setupViews()
 	}
 	
 	func setupViews() {
-		startTimer()
+		startAnimation()
 		collectionView.isHidden = true
 		collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: K.collectionCellID)
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +79,7 @@ class HomeViewController: UIViewController {
 		navigationController?.navigationBar.backgroundColor = UIColor(named: K.background)
 	}
 	
-	func startTimer() {
+	func startAnimation() {
 		spinner.isHidden = false
 		if timer == nil {
 			timer = Timer.scheduledTimer(timeInterval:0.0, target: self, selector: #selector(self.animateView), userInfo: nil, repeats: false)
@@ -96,7 +96,7 @@ class HomeViewController: UIViewController {
 		})
 	}
 	
-	func stopTimer() {
+	func stopAnimation() {
 		timer?.invalidate()
 		collectionView.isHidden = false
 		timer = nil
@@ -158,33 +158,38 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: UISearchBarDelegate {
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		DispatchQueue.main.async { [weak self] in
-			self?.startTimer()
-			self?.collectionView.isHidden = true
+		if searchBar.text == "" {
+			searchBar.resignFirstResponder()
+		} else {
+			recipes = []
+			DispatchQueue.main.async { [weak self] in
+				self?.startAnimation()
+				self?.collectionView.isHidden = true
+			}
+			timer2 = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
+			searchBar.resignFirstResponder()
+			
 		}
-		timer2 = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
-		searchBar.resignFirstResponder()
 	}
 	
 	@objc func callAPI() {
-//		let searchString = searchBar.text!
-		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-//			self?.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
+		let searchString = searchBar.text!
+		self.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
+			self.recipes = response
+			DispatchQueue.main.async { [weak self] in
+				self?.searchBar.text = ""
+				self?.stopAnimation()
+				self?.collectionView.isHidden = false
+			}
+		}
+//			Mock Call
+//			self?.searchManager.getDataFromFile(completion: { response in
 //				self?.recipes = response
-//				DispatchQueue.main.async {
-//					self?.stopTimer()
+//				DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+//					self?.stopAnimation()
 //					self?.collectionView.isHidden = false
 //				}
-//			}
-			
-			self?.searchManager.getDataFromFile(completion: { response in
-				self?.recipes = response
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-					self?.stopTimer()
-					self?.collectionView.isHidden = false
-				}
-			})
-			self?.timer2?.invalidate()
-		}
+//			})
+		timer2?.invalidate()
 	}
 }

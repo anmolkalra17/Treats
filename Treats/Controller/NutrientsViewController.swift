@@ -35,10 +35,10 @@ class NutrientsViewController: UITableViewController {
 		}
 		
 		// Mock call: Remove later
-		//		if let x = searchManager.getNutritionDataFromFile() {
-		//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
-		//			print(nutritionData!)
-		//		}
+//		if let x = searchManager.getNutritionDataFromFile() {
+//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
+//			print(nutritionData!)
+//		}
 	}
 	
 	func setupView() {

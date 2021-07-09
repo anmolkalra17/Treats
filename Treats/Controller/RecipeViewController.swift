@@ -76,7 +76,7 @@ class RecipeViewController: UIViewController {
 		var recipeSteps = RecipeSteps(recipe: recipe)
 		var finalStep = ""
 		
-		guard let dataCount = recipe.analyzedInstructions.first?.steps.count else { return "Error in data count" }
+		guard let dataCount = recipe.analyzedInstructions.first?.steps.count else { return "Could not find recipe." }
 		for i in 0...dataCount - 1 {
 			let step = recipe.analyzedInstructions.first?.steps[i].step
 			recipeSteps.stepsToFollow.updateValue(step ?? "" + "\n" , forKey: i + 1)
