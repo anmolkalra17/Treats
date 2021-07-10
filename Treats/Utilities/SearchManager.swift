@@ -74,7 +74,7 @@ class SearchManager {
 	
 	//	Getting nutrition data
 	
-	func getNutritionData(for recipeName: String, completion: @escaping (NutritionModel) -> Void) {
+	func getNutritionData(for recipeName: String, completion: @escaping (NutritionModel?) -> Void) {
 		let url = createNutritionURL(for: recipeName)
 		let session = URLSession.shared
 		session.dataTask(with: url) { data, response, error in
@@ -91,12 +91,10 @@ class SearchManager {
 	}
 	
 	func parseNutritionJSON(using data: Data) -> NutritionModel? {
-		var nutritonData: NutritionModel!
 		do {
-			nutritonData = try JSONDecoder().decode(NutritionModel.self, from: data)
-			return nutritonData
-		} catch {
-			print(error)
+			if let nutritonData = try? JSONDecoder().decode(NutritionModel.self, from: data) {
+				return nutritonData
+			}
 		}
 		return nil
 	}

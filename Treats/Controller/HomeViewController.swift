@@ -67,7 +67,6 @@ class HomeViewController: UIViewController {
 		collectionView.dataSource = self
 		collectionView.backgroundColor = UIColor(named: K.background)
 		searchBar.delegate = self
-		searchBar.tintColor = UIColor(named: K.background)
 		searchBar.isTranslucent = false
 		view.backgroundColor = UIColor(named: K.background)
 		view.addSubview(collectionView)
@@ -101,6 +100,12 @@ class HomeViewController: UIViewController {
 		collectionView.isHidden = false
 		timer = nil
 		spinner.isHidden = true
+	}
+	
+	func handleError() {
+		let ac = UIAlertController(title: "Error", message: "Could not fetch data from server.", preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+		present(ac, animated: true, completion: nil)
 	}
 }
 
@@ -162,34 +167,42 @@ extension HomeViewController: UISearchBarDelegate {
 			searchBar.resignFirstResponder()
 		} else {
 			recipes = []
+			recipeImageData = [:]
 			DispatchQueue.main.async { [weak self] in
 				self?.startAnimation()
 				self?.collectionView.isHidden = true
 			}
 			timer2 = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(callAPI), userInfo: nil, repeats: false)
 			searchBar.resignFirstResponder()
-			
 		}
 	}
 	
 	@objc func callAPI() {
 		let searchString = searchBar.text!
 		self.searchManager.getRecipeData(for: searchString, numberOfResults: "10") { response in
-			self.recipes = response
-			DispatchQueue.main.async { [weak self] in
-				self?.searchBar.text = ""
-				self?.stopAnimation()
-				self?.collectionView.isHidden = false
+			if response.isEmpty {
+				DispatchQueue.main.async { [weak self] in
+					self?.handleError()
+					self?.searchBar.text = ""
+					self?.stopAnimation()
+				}
+			} else {
+				self.recipes = response
+				DispatchQueue.main.async { [weak self] in
+					self?.searchBar.text = ""
+					self?.stopAnimation()
+					self?.collectionView.isHidden = false
+				}
+	//			Mock Call
+	//			self?.searchManager.getDataFromFile(completion: { response in
+	//				self?.recipes = response
+	//				DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+	//					self?.stopAnimation()
+	//					self?.collectionView.isHidden = false
+	//				}
+	//			})
 			}
 		}
-//			Mock Call
-//			self?.searchManager.getDataFromFile(completion: { response in
-//				self?.recipes = response
-//				DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-//					self?.stopAnimation()
-//					self?.collectionView.isHidden = false
-//				}
-//			})
 		timer2?.invalidate()
 	}
 }

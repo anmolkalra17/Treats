@@ -9,9 +9,7 @@ import UIKit
 
 class NutrientsViewController: UITableViewController {
 	
-	let searchManager = SearchManager()
 	let K = Constants()
-	var recipeName: String?
 	var recipe: Results?
 	var nutritionData: NutritionData? {
 		didSet {
@@ -28,17 +26,8 @@ class NutrientsViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		searchManager.getNutritionData(for: recipeName ?? "") { response in
-			self.nutritionData = NutritionData(calories: response.calories.value, fat: response.fat.value, protein: response.protein.value, carbs: response.carbs.value, caloriesUnit: response.calories.unit, fatUnit: response.fat.unit, protienUnit: response.protein.unit, carbsUnit: response.carbs.unit)
-			print(self.nutritionData!)
-		}
 		
-		// Mock call: Remove later
-//		if let x = searchManager.getNutritionDataFromFile() {
-//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
-//			print(nutritionData!)
-//		}
+		setupView()
 	}
 	
 	func setupView() {
@@ -102,5 +91,5 @@ class NutrientsViewController: UITableViewController {
 			cell.imageView?.image = nil
 		}
 		return cell
-	}
+	}	
 }
