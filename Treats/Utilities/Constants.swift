@@ -19,6 +19,7 @@ struct Constants {
 	//Color Constants
 	let background = "backgroundColorGlobal"
 	let fontColor = "textColorGlobal"
+	let navBarColor = "NavBarBackgroundColor"
 	
 	//CollectionView Cell Identifier
 	let collectionCellID = "recipeCell"

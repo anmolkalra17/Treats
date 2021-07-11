@@ -75,7 +75,7 @@ class HomeViewController: UIViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.backButtonTitle = "Back"
 		navigationController?.navigationBar.isTranslucent = true
-		navigationController?.navigationBar.backgroundColor = UIColor(named: K.background)
+		navigationController?.navigationBar.backgroundColor = UIColor(named: K.navBarColor)
 	}
 	
 	func startAnimation() {
@@ -113,6 +113,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return recipes.count
+	}
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		searchBar.resignFirstResponder()
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
