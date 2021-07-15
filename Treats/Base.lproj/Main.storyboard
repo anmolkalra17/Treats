@@ -44,7 +44,7 @@
                                     <constraint firstAttribute="width" constant="40" id="FxC-nN-U5a"/>
                                 </constraints>
                             </imageView>
-                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" text="" placeholder="What are you craving?" translatesAutoresizingMaskIntoConstraints="NO" id="gBO-Z9-UCd">
+                            <searchBar contentMode="redraw" text="" placeholder="What are you craving?" translatesAutoresizingMaskIntoConstraints="NO" id="gBO-Z9-UCd">
                                 <rect key="frame" x="0.0" y="88" width="390" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>

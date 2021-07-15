@@ -12,7 +12,6 @@
 		7B93F21D269311200077D996 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B93F21C269311200077D996 /* test.json */; };
 		7B99E3172697633600FD8947 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E3162697633600FD8947 /* HomeViewModel.swift */; };
 		7B99E3192697634000FD8947 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E3182697634000FD8947 /* RecipeViewModel.swift */; };
-		7B99E31B2697634A00FD8947 /* NutrientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B99E31A2697634A00FD8947 /* NutrientsViewModel.swift */; };
 		7BA54CB726943A270048E5D2 /* RecipeSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CB626943A270048E5D2 /* RecipeSteps.swift */; };
 		7BA54CB9269448E60048E5D2 /* NutritionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CB8269448E60048E5D2 /* NutritionData.swift */; };
 		7BA54CBB26944B1E0048E5D2 /* NutritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA54CBA26944B1E0048E5D2 /* NutritionModel.swift */; };
@@ -37,7 +36,6 @@
 		7B93F21C269311200077D996 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		7B99E3162697633600FD8947 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7B99E3182697634000FD8947 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
-		7B99E31A2697634A00FD8947 /* NutrientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientsViewModel.swift; sourceTree = "<group>"; };
 		7BA54CB626943A270048E5D2 /* RecipeSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSteps.swift; sourceTree = "<group>"; };
 		7BA54CB8269448E60048E5D2 /* NutritionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionData.swift; sourceTree = "<group>"; };
 		7BA54CBA26944B1E0048E5D2 /* NutritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionModel.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			children = (
 				7B99E3162697633600FD8947 /* HomeViewModel.swift */,
 				7B99E3182697634000FD8947 /* RecipeViewModel.swift */,
-				7B99E31A2697634A00FD8947 /* NutrientsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,7 +227,6 @@
 				7BD4759B2691C2B000E92F14 /* HomeViewController.swift in Sources */,
 				7BD475972691C2B000E92F14 /* AppDelegate.swift in Sources */,
 				7BD475BC2691E15D00E92F14 /* NoResultsView.swift in Sources */,
-				7B99E31B2697634A00FD8947 /* NutrientsViewModel.swift in Sources */,
 				7B6EF9C62696C8DC0017264F /* PDFCreator.swift in Sources */,
 				7B99E3192697634000FD8947 /* RecipeViewModel.swift in Sources */,
 				7BA54CBB26944B1E0048E5D2 /* NutritionModel.swift in Sources */,

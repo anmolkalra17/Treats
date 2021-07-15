@@ -18,7 +18,7 @@ class RecipeCell: UICollectionViewCell {
 		someView.layer.shadowOffset = CGSize(width: 3, height: 3)
 		someView.layer.shadowColor = UIColor.gray.cgColor
 		someView.layer.shadowOpacity = 0.3
-		someView.backgroundColor = UIColor(named: "backgroundColorGlobal")
+		someView.backgroundColor = UIColor(named: "cellColor")
 		return someView
 	}()
 	
@@ -36,7 +36,6 @@ class RecipeCell: UICollectionViewCell {
 		label.font = UIFont.boldSystemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.numberOfLines = 0
-		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 
@@ -51,7 +50,6 @@ class RecipeCell: UICollectionViewCell {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 
@@ -59,7 +57,6 @@ class RecipeCell: UICollectionViewCell {
 		let label = UILabel()
 		label.font = UIFont.systemFont(ofSize: 16)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.textColor = UIColor(named: "textColorGlobal")
 		return label
 	}()
 	

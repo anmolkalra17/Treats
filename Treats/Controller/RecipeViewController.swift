@@ -15,11 +15,11 @@ class RecipeViewController: UIViewController {
 	@IBOutlet weak var foodTypeImage: UIImageView!
 	@IBOutlet weak var stepsTextView: UITextView!
 	
+	let viewModel = RecipeViewModel()
 	var recipes: Results?
 	var index: Int?
 	var imageData: Data?
 	let K = Constants()
-	let searchManager = SearchManager()
 	var nutritionData: NutritionData?
 	
 	override func viewDidLoad() {
@@ -42,29 +42,22 @@ class RecipeViewController: UIViewController {
 		let shareRecipeButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareRecipe))
 		navigationItem.rightBarButtonItems = [shareRecipeButton, infoButton]
 		
-		view.backgroundColor = UIColor(named: K.background)
 		imageView.image = UIImage(data: imageData!)
 		imageView.layer.cornerRadius = 16
 		imageView.contentMode = .scaleToFill
 		readyInTextLabel.text = "⏳ \(String(recipes!.readyInMinutes)) mintues"
-		readyInTextLabel.textColor = UIColor(named: K.fontColor)
 		servesPeopleLabel.text = "Serves: \(String(recipes!.servings)) people"
-		servesPeopleLabel.textColor = UIColor(named: K.fontColor)
 		foodTypeImage.image = UIImage(named: recipes!.vegetarian ? "veg" : "non-veg")
 		
 		stepsTextView.textAlignment = .justified
 		stepsTextView.text = setupRecipeSteps(using: recipes!)
-		stepsTextView.backgroundColor = UIColor(named: K.background)
-		stepsTextView.textColor = UIColor(named: K.fontColor)
 		stepsTextView.isEditable = false
 		stepsTextView.isSelectable = false
-		
-		
 	}
 	
 	@objc func showNutrientsInfo() {
 		if nutritionData == nil {
-			handleError()
+			viewModel.handleError(for: self)
 		} else {
 			guard let nutrientsVC = storyboard?.instantiateViewController(withIdentifier: "Nutrients") as? NutrientsViewController else { return }
 			nutrientsVC.dairyFree = recipes?.dairyFree
@@ -104,22 +97,9 @@ class RecipeViewController: UIViewController {
 	}
 	
 	func callAPI() {
-		searchManager.getNutritionData(for: recipes!.title) { response in
+		viewModel.searchManager.getNutritionData(for: recipes!.title) { response in
 			self.nutritionData = NutritionData(calories: response!.calories.value, fat: response!.fat.value, protein: response!.protein.value, carbs: response!.carbs.value, caloriesUnit: response!.calories.unit, fatUnit: response!.fat.unit, protienUnit: response!.protein.unit, carbsUnit: response!.carbs.unit)
 			print(self.nutritionData!)
-			
-			// Mock call: Remove later
-			//		if let x = searchManager.getNutritionDataFromFile() {
-			//			nutritionData = NutritionData(calories: x.calories.value, fat: x.fat.value, protein: x.protein.value, carbs: x.carbs.value, caloriesUnit: x.calories.unit, fatUnit: x.fat.unit, protienUnit: x.protein.unit, carbsUnit: x.carbs.unit)
-			//			print(nutritionData!)
-			//		}
 		}
-	}
-	
-	func handleError() {
-		let ac = UIAlertController(title: "Error", message: "Could not find nutritional data.", preferredStyle: .alert)
-		let okay = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-		ac.addAction(okay)
-		present(ac, animated: true, completion: nil)
 	}
 }

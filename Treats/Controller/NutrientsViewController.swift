@@ -56,7 +56,6 @@ class NutrientsViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsCell", for: indexPath)
-		//TODO: - Handle Errors
 		switch indexPath.row {
 		case 0:
 			cell.textLabel?.text = "Calories: \(nutritionData?.calories ?? 0) \(nutritionData?.caloriesUnit ?? "")"
