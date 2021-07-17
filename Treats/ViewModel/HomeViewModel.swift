@@ -26,7 +26,7 @@ class HomeViewModel {
 	}
 	
 	func handleError(for searchTextString: String?, viewController: UIViewController) {
-		let ac = UIAlertController(title: "Error", message: "Could not find results for \(searchTextString ?? "")", preferredStyle: .alert)
+		let ac = UIAlertController(title: "Error", message: "Could not find results for \(searchTextString ?? ""). Try Again!", preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 		viewController.present(ac, animated: true, completion: nil)
 	}

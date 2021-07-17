@@ -36,7 +36,6 @@ class NoResultsView: UIView {
 		self.addSubview(messageLabel)
 		
 		NSLayoutConstraint.activate([
-			
 			self.heightAnchor.constraint(equalToConstant: 300),
 			mainLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 			mainLabel.topAnchor.constraint(equalTo: self.topAnchor)
