@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+enum MyError: Error {
+	case dataNotFound
+}
+
 class HomeViewModel {
 	let searchManager = SearchManager()
 	
@@ -23,6 +27,17 @@ class HomeViewModel {
 			guard let safeData = data else { return }
 			completion(safeData)
 		}.resume()
+	}
+	
+	@available(iOS 15.0.0, *)
+	func getImageForCellAsync(using url: URL) async -> Data? {
+		do {
+			let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
+			return data
+		} catch {
+			print(error)
+			return nil
+		}
 	}
 	
 	func handleError(for searchTextString: String?, viewController: UIViewController) {

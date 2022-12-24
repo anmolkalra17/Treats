@@ -108,11 +108,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 		
 		if viewModel.recipeImageData[recipe.image] == nil {
 			guard let imageURL = URL(string: recipe.image) else { return cell }
-			self.viewModel.getImageForCell(using: imageURL) { imageData in
-				self.viewModel.recipeImageData.updateValue(imageData, forKey: recipe.image)
-				DispatchQueue.main.async {
-					cell.imageView.image = UIImage(data: imageData)
+//			self.viewModel.getImageForCell(using: imageURL) { imageData in
+//				self.viewModel.recipeImageData.updateValue(imageData, forKey: recipe.image)
+//				DispatchQueue.main.async {
+//					cell.imageView.image = UIImage(data: imageData)
+//				}
+//			}
+			if #available(iOS 15.0, *) {
+				Task.init {
+					let imageData = await self.viewModel.getImageForCellAsync(using: imageURL)
+					self.viewModel.recipeImageData.updateValue(imageData!, forKey: recipe.image)
+					cell.imageView.image = UIImage(data: imageData!)
 				}
+			} else {
+				// Fallback on earlier versions
 			}
 		} else {
 			DispatchQueue.main.async {
